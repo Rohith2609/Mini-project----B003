@@ -1,0 +1,993 @@
+#include<stdio.h>
+#include<string.h>
+#include<windows.h>
+#include<stdlib.h>
+#include<conio.h>
+void registration_user();
+void login_user();
+void registration_owner();
+void login_owner();
+void area();
+void crops();
+void irrigation();
+void fertilizers();
+void crop_price();
+void fertilizer_price();
+void market_price();
+
+int main()
+{
+	printf("\t\t***********************************************************\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*            PLANT GROWTH RECOMMENDATION                  *\n");
+        printf("\t\t*                     SYSTEM                              *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t*                                                         *\n");
+        printf("\t\t***********************************************************\n");
+        printf("\t\t                  \n");
+    char s[50];
+    printf("-------------------- WELCOME ------------------- \n");
+    printf("enter your name : ");
+    gets(s);
+    printf(" Hi ");
+    puts(s);
+    printf("\n");
+    int z;
+    printf("Select either admin or user \n\n");
+    printf(" If user choose 1 \n\n If admin choose 2 \n\n");
+    printf("Enter choice : ");
+    scanf("%d",&z);
+    if(z==1){
+	    int a;
+	    printf("\nPLEASE SELECT EITHER REGISTRATION OR LOGIN\n");
+	    printf("\n PRESS 1 FOR REGISTRATION AND 2 FOR LOGIN\n");
+	    scanf("%d",&a);
+	    if(a==1){
+		    registration_user();
+	    }
+	    if(a==2){
+		    login_user(); }
+    }
+   if(z==2){
+	     int a;
+            printf("\nPLEASE SELECT EITHER REGISTRATION OR LOGIN\n");
+            printf("\n PRESS 1 FOR REGISTRATION AND 2 FOR LOGIN\n");
+            scanf("%d",&a);
+            if(a==1){
+                    registration_owner();
+            }
+            if(a==2){
+                    login_owner(); }
+
+
+}
+}
+void registration_user(){
+
+      char password[32], username[50],choice[1];
+      FILE *fp;
+      int i=0;
+      system("cls");
+        printf("\n PLEASE ENTER YOUR DETAILS\n");
+          printf("\nEnter the Username :\n");
+          scanf("%s",username);
+          printf("\n");
+          printf("\nEnter the Password :\n");
+          do
+          {
+            password[i]=getch();
+            if(password[i] == 13)
+            {
+              password[i]='\0';
+              break;
+            }
+            else if(password[i] == ' ')
+            {
+                continue;
+            }
+            else if(password[i]== '\b')
+            {
+                printf("\b \b");
+                i--;
+            }
+
+            else
+            {
+             printf("*");
+             i++;
+            }
+
+          }while(1);
+          fp=fopen("user.txt","w");
+          fprintf(fp,"%s \n%s", username,password);
+          fclose(fp);
+ printf("\n account is created/edited successfully\n");
+     int d;
+     printf("\nPLEASE SELECT IF YOU WANT TO EXIT OR LOGIN\n");
+     printf("\nSELECT 1 FOR EXIT 2 FOR LOGIN\n");
+     scanf("%d",&d);  
+     if(d==1){
+	     exit(1);
+     }
+     if(d==2){
+	     login_user();
+     }
+}
+void login_user(){
+
+   char password[32], username[50],choice[1];
+      FILE *fp;
+      int i=0;
+      system("cls");
+        printf("\nPLEASE ENTER YOUR DETAILS FOR LOGIN\n");
+          char check_username[50], check_password[32];
+          fp=fopen("user.txt","r");
+          printf("\nEnter the Username :\n ");
+          scanf("%s",username);
+          printf("\nEnter the Password :\n ");
+          do
+          {
+            password[i]=getch();
+            if(password[i] == 13)
+            {
+              password[i]='\0';
+              break;
+            }
+            else if(password[i] == ' ')
+            {
+                    continue;
+            }
+            else if(password[i] == '\b')
+            {
+                 printf("\b \b");
+                 i--;
+            }
+            else
+            {
+              printf("*");
+              i++;
+            }
+
+          }while(1);
+          fscanf(fp,"%s \n%s",check_username,check_password);
+          if(!(strcmp(check_username,username) || strcmp(check_password,password)))
+          {
+                  printf("\n logged in successfully\n");
+		  int t=0;
+		  while(t!=5){
+                printf("\n1.SELECT FOR AREA\n");
+                printf("\n2.SELECT FOR THE TYPE OF CROPS\n");
+                printf("\n3.SELECT FOR THE IRRIGATION TYPE\n");
+                printf("\n4.SELECT FOR THE FERTILIZERS \n");
+		printf("\n5.EXIT\n");
+                printf("\nEnter your choice :\n ");
+                scanf("%d",&t);
+                switch(t)
+                {
+                 case 1:
+                        area();
+                        break;
+                 case 2:
+                        crops();
+                        break;
+                 case 3:
+                        irrigation();
+                        break;
+                 case 4:fertilizers();
+                        break;
+	         case 5:exit(1);
+			break;
+                 default:printf("\n INVALID CHOICE\n");
+                         break;
+	
+		  }
+	  }}
+	 if(!(!(strcmp(check_username,username) || strcmp(check_password,password))))
+          {
+             printf("\nInvalid username or password\n");
+             printf("\nSorry, logging you out\n ");
+             printf("\nPress any key to exit...\n");
+	  }
+          fclose(fp);
+}
+void registration_owner(){
+
+      char password[32], username[50],choice[1];
+      FILE *fp;
+      int i=0;
+      system("cls");
+        printf("\n PLEASE ENTER YOUR DETAILS\n");
+          printf("\nEnter the Username :\n");
+          scanf("%s",username);
+          printf("\n");
+          printf("\nEnter the Password :\n");
+          do
+          {
+            password[i]=getch();
+            if(password[i] == 13)
+            {
+              password[i]='\0';
+              break;
+            }
+            else if(password[i] == ' ')
+            {
+                continue;
+            }
+            else if(password[i]== '\b')
+            {
+                printf("\b \b");
+                i--;
+            }
+
+            else
+            {
+             printf("*");
+             i++;
+            }
+
+          }while(1);
+          fp=fopen("admin.txt","w");
+          fprintf(fp,"%s \n%s", username,password);
+          fclose(fp);
+ printf("\n account is created/edited successfully\n");
+  int d;
+     printf("\nPLEASE SELECT IF YOU WANT TO EXIT OR LOGIN\n");
+     printf("\nSELECT 1 FOR EXIT 2 FOR LOGIN\n");
+     scanf("%d",&d);
+     if(d==1){
+             exit(1);
+     }
+     if(d==2){
+             login_owner();
+     }
+   }
+void login_owner(){
+
+   char password[32], username[50],choice[1];
+      FILE *fp;
+      int i=0;
+      system("cls");
+        printf("\nPLEASE ENTER YOUR DETAILS FOR LOGIN\n");
+          char check_username[50], check_password[32];
+          fp=fopen("admin.txt","r");
+          printf("\nEnter the Username :\n ");
+          scanf("%s",username);
+          printf("\nEnter the Password :\n ");
+          do
+          {
+            password[i]=getch();
+            if(password[i] == 13)
+            {
+              password[i]='\0';
+              break;
+            }
+            else if(password[i] == ' ')
+            {
+                    continue;
+            }
+            else if(password[i] == '\b')
+            {
+                 printf("\b \b");
+                 i--;
+            }
+            else
+            {
+              printf("*");
+              i++;
+            }
+
+          }while(1);
+          fscanf(fp,"%s \n%s",check_username,check_password);
+          if(!(strcmp(check_username,username) || strcmp(check_password,password)))
+          {
+                  printf("\n logged in successfully\n");
+		  int t=0;
+		  while(t!=4){
+                printf("\n1.SELECT FOR THE CROP PRICE\n");
+                printf("\n2.SELECT FOR THE FERTILIZER PRICE\n");
+                printf("\n3.SELECT FOR THE MARKET PRICE\n");
+                printf("\n4.EXIT \n");
+                printf("\nEnter your choice :\n ");
+                scanf("%d",&t);
+                switch(t)
+                {
+                 case 1:
+                        crop_price();
+                        break;
+                 case 2:
+                        fertilizer_price();
+                        break;
+                 case 3:
+                        market_price();
+                        break;
+	         case 4:exit(1);
+			break;
+                 default:printf("\n INVALID CHOICE\n");
+                         break;
+	
+		  }
+	  }}
+	 if(!(!(strcmp(check_username,username) || strcmp(check_password,password))))
+          {
+             printf("\nInvalid username or password\n");
+             printf("\nSorry, logging you out\n ");
+             printf("\nPress any key to exit...\n");
+	  }
+          fclose(fp);
+}
+void area()
+{
+	int a;
+	char c;
+	FILE *file;
+	system("cls");
+	printf("\nSELECT ANY AREA:\n1.GACHIBOWLI \n2.UPPAL\n 3.PATANCHERU");
+	scanf("%d",&a);
+	if(a==1)
+	{
+	        
+                file = fopen("Gachibowli.txt","r");
+                c=fgetc(file);
+                while (c!=EOF)
+                {
+                        printf("%c" ,c);
+                        c= fgetc(file);
+                }
+                fclose(file);
+		printf("\n PLEASE SELECT ANY SUBAREA\n");
+		 int q;
+                scanf("%d" ,&q);
+	   if(q==1){
+		   printf("\nWELCOME TO APHB COLONY\n THE SOIL HERE IS THE RED SOIL\n");
+	   }
+		    if(q==2){
+			    printf("\nWELCOME TO CHITRAPURI COLONY\n THE SOIL HERE IS THE  BLACK SOIL\n");
+		    }
+		    if(q==3){
+			    printf("\nWELCOME TO ALEKHYA COLONY\n THE SOIL HERE IS THE LOAMY SOIL\n");
+		    }
+		     else{
+                printf("\n PLEASE CHECK THE ENTERED NUMBER \n");
+        }
+		}
+          if(a==2)
+	{
+		file = fopen("Uppal.txt","r");
+		c=fgetc(file);
+		while (c!=EOF)
+		{
+			printf("%c" ,c);
+			c= fgetc(file);
+		}
+		fclose(file);
+		 printf("\nPLEASE SELECT ANY SUBAREA\n");
+                 int w;
+                scanf("%d" ,&w);
+           if(w==1){
+                   printf("\nWELCOME TO VENKATESHWARA COLONY\n THE SOIL HERE IS THE BLACK SOIL\n");
+           }
+                    if(w==2){
+                            printf("\nWELCOME TO RAJNAGAR COLONY\n THE SOIL HERE IS THE ALLUVIAL SOIL\n");
+                    }
+                    if(w==3){
+                            printf("\nWELCOME TO SRINAGAR COLONY\n THE SOIL HERE IS THE RED SOIL\n");
+                    }
+		     else{
+                printf("\n PLEASE CHECK THE ENTERED NUMBER \n");
+        }
+                }
+	if(a==3)
+	{
+		file = fopen("Patancheru.txt" ,"r");
+		c=fgetc(file);
+		while(c!=EOF)
+		{
+			printf("%c" ,c);
+			c= fgetc(file);
+		}
+		fclose(file);
+		 printf("\n PLEASE SELECT ANY SUBAREA\n");
+                 int z;
+                scanf("%d" ,&z);
+           if(z==1){
+                   printf("\nWELCOME TO ALWIN COLONY\n THE SOIL HERE IS THE LATERITE SOIL\n");
+           }
+                    if(z==2){
+                            printf("\nWELCOME TO INDRA BHAVAN COLONY\n THE SOIL HERE IS THE LOAMY SOIL\n");
+                    }
+                    if(z==3){
+                            printf("\nWELCOME TO DEFENCE COLONY\n THE SOIL HERE IS THE ALLUVIAL SOIL\n");
+                    }
+                
+	else{
+		printf("\n PLEASE CHECK THE ENTERED NUMBER \n");
+	}
+
+}
+}
+void crops()
+{
+	char c;
+	FILE *file;
+	FILE *fp;
+	system("cls");
+           printf("\n PLEASE SELECT THE TYPE OF SOIL\n");
+	   printf("\n1.REDSOIL\n2.BLACKSOIL\n3.ALLUVIAL\n4.LATERITE\n5.LOAMY\n ");
+            int t;
+          scanf("%d",&t);
+          if(t==1)
+	  {
+	      	file = fopen("redsoil.txt" ,"r");
+                c=fgetc(file);
+                while(c!=EOF)
+                {
+                        printf("%c" ,c);
+                        c= fgetc(file);
+                }
+                fclose(file);
+	  }
+         if(t==2)
+	 {
+             fp = fopen("black.txt" ,"r");
+                c=fgetc(fp);
+                while(c!=EOF)
+                {
+                        printf("%c" ,c);
+                        c= fgetc(fp);
+                }
+                fclose(fp);
+	 }
+        if(t==3)
+	{
+          	file = fopen("alluvial.txt" ,"r");
+                c=fgetc(file);
+                while(c!=EOF)
+                {
+                        printf("%c" ,c);
+                        c= fgetc(file);
+                }
+                fclose(file);
+	}
+	 if(t==4)
+        {
+                        file = fopen("laterite.txt" ,"r");
+                c=fgetc(file);
+                while(c!=EOF)
+                {
+                        printf("%c" ,c);
+                        c= fgetc(file);
+                }
+                fclose(file);
+        }
+	  if(t==5)
+        {
+                        file = fopen("loamy.txt" ,"r");
+                c=fgetc(file);
+                while(c!=EOF)
+                {
+                        printf("%c" ,c);
+                        c= fgetc(file);
+                }
+                fclose(file);
+        }
+	  else{
+		  printf("\n PLEASE ENTER THE CORRECT NUMBER \n");
+	
+}
+}
+void irrigation()
+{       
+	system("cls");
+	char str[20];
+	char str1[]="ridgegaurd" , str2[]="cucumber" ,str3[]="maize",str4[]="cotton",str5[]="sugarcane",str6[]="cashew",str7[]="tea",str8[]="coffee",str9[]="coconut",str10[]="tomato",str11[]="greenbeans",str12[]="onions", str13[]="wheat" ,str14[]="rice" ,str15[]="millets";
+	printf("\n PLEASE SELECT FROM THE FOLLOWING CROPS\n1.RIDGE GAURD\n2.CUCUMBER\n3.MAIZE\n4.COTTON\n5.SUGARCANE\n6.CASHEW\n7.TEA\n8.COFFEE\n9.COCONUT\n10.TOMATO\n11.GREEN BEANS\n12.ONIONS\n13.WHEAT\n14..RICE\n15.MILLETS");
+	printf("\nPLEASE ENTER THE CROP NAME IN SMALL CASE LETTERS WITHOUT SPACES\n");
+	scanf("%s" ,str);
+        if(strcmp(str,str1)==0)
+	{
+		
+              printf("\nTHE SELECTED CROP IS RIDGE GAURD\n IT FOLLOWS DRIP IRRIGATION \n");
+          }
+       if(strcmp(str,str2)==0)
+        {
+              printf("\nTHE SELECTED CROP IS CUCUMBER\n IT FOLLOWS SPRINKLER IRRIGATION \n");
+          }
+        if(strcmp(str,str3)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS MAIZE\n IT FOLLOWS BASIN IRRIGATION \n");
+          }
+           if(strcmp(str,str4)==0)
+        {
+                printf("\nTHE SELECTED CROP IS  COTTON\n IT FOLLOWS FURROW IRRIGATION \n");
+          }
+	    if(strcmp(str,str5)==0)
+        {
+             printf("\nTHE SELECTED CROP IS SUGARCANE\n IT FOLLOWS FURROW IRRIGATION \n");
+          }
+	     if(strcmp(str,str6)==0)
+        {
+              printf("\nTHE SELECTED CROP IS CASHEW\n IT FOLLOWS DRIP IRRIGATION \n");   
+          }
+	      if(strcmp(str,str7)==0)
+        {
+               printf("\nTHE SELECTED CROP IS TEA\n IT FOLLOWS  SURFACE IRRIGATION \n");
+          }
+	       if(strcmp(str,str8)==0)
+        {
+                printf("\nTHE SELECTED CROP IS COFFEE\n IT FOLLOWS SURFACE IRRIGATION \n");
+          }
+	        if(strcmp(str,str9)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS COCONUT\n IT GROWS NEAR THE SEA SHORES \n");
+          }
+		 if(strcmp(str,str10)==0)
+        {
+                   printf("\nTHE SELECTED CROP IS TOMATO\n IT FOLLOWS FURROW IRRIGATION \n");
+          }
+		  if(strcmp(str,str11)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS GREEN BEANS\n IT FOLLOWS BASIN IRRIGATION \n");
+          }
+		   if(strcmp(str,str12)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS ONION\n IT FOLLOWS SURFACE IRRIGATION \n");
+          }
+		    if(strcmp(str,str13)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS WHEAT\n IT REQUIRES LOT OF WATER\n");
+          }
+		     if(strcmp(str,str14)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS RICE\n IT REQUIRES LOT OF WATER \n");
+          }
+		      if(strcmp(str,str15)==0)
+        {
+                    printf("\nTHE SELECTED CROP IS MILLETS\n IT FOLLOWS SURFACE IRRIGATION \n");
+          }
+		      else{
+			      printf(" \n PLEASE CHECK THE SPELLING \n");
+}
+}
+void fertilizers()
+{  
+	system("cls");
+	 char str[20];
+         char str1[]="ridgegaurd" , str2[]="cucumber" ,str3[]="maize",str4[]="cotton",str5[]="sugarcane",str6[]="cashew",str7[]="tea",str8[]="coffee",str9[]="coconut",str10[]="tomato",str11[]="greenbeans",str12[]="onions", str13[]="wheat" ,str14[]="rice" ,str15[]="millets";
+	  printf("\n PLEASE SELECT FROM THE FOLLOWING CROPS\n1.RIDGE GAURD\n2.CUCUMBER\n3.MAIZE\n4.COTTON\n5.SUGARCANE\n6.CASHEW\n7.TEA\n8.COFFEE\n9.COCONUT\n10.TOMATO\n11.GREEN BEANS\n12.ONIONS\n13.WHEAT\n14..RICE\n15.MILLETS");
+        printf("\nPLEASE ENTER THE CROP NAME IN SMALL CASE LETTERS WITHOUT SPACES\n");
+        scanf("%s" ,str);
+        if(strcmp(str,str1)==0)
+        {
+
+              printf("\nTHE SELECTED CROP IS RIDGE GAURD\n WE CAN USE 2 TYPES OF FERTILIZERS\n1.AMMONIUM SULPHATE\n2.AMMONIUM CHLORIDE \n");
+          }
+       if(strcmp(str,str2)==0)
+        {
+              printf("\nTHE SELECTED CROP IS CUCUMBER\n THE FERTILIZER USED IS PHOSPHATIC FERTILIZERS \n");
+          }
+        if(strcmp(str,str3)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS MAIZE\n WE CAN USE 2 TYPES OF FERTILIZERS\n1.SULPHUR FERTILIZERS\n2.N.P.COMPLEX FERTILIZERS \n");
+          }
+           if(strcmp(str,str4)==0)
+        {
+                printf("\nTHE SELECTED CROP IS  COTTON\n THE FERTILIZER USED IS N.K.COMPLEX FERTILIZER \n");
+          }
+            if(strcmp(str,str5)==0)
+        {
+             printf("\nTHE SELECTED CROP IS SUGARCANE\n WE CAN USE 3 TYPES OF FERTILIZERS\n1.FORTIFIED FERTILIZERS\n2.SOLUBLE COMPLEX\n3.SULPHUR FERTILIZERS \n");
+          }
+             if(strcmp(str,str6)==0)
+        {
+              printf("\nTHE SELECTED CROP IS CASHEW\n WE CAN USE STRAIGHT AMMONIA FERTILIZERS \n");
+          }
+              if(strcmp(str,str7)==0)
+        {
+               printf("\nTHE SELECTED CROP IS TEA\n WE CAN USE AMMONIA AND SULPHUR FERTILIZERS \n");
+          }
+               if(strcmp(str,str8)==0)
+        {
+                printf("\nTHE SELECTED CROP IS COFFEE\n WE CAN USE N.P.COMPLEX FERTILIZERS \n");
+          }
+                if(strcmp(str,str9)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS COCONUT\n WE DO NOT USE ANY TYPE OF FERTILIZERS\n");
+          }
+                 if(strcmp(str,str10)==0)
+	{
+                   printf("\nTHE SELECTED CROP IS TOMATO\n  WE CAN USE 2 TYPES OF FERTILIZERS\n1.SULPHUR FERTILIZERS\n2.N.P.COMPLEX FERTILIZERS \n");
+          }
+                  if(strcmp(str,str11)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS GREEN BEAN\n  WE CAN USE 3 TYPES OF FERTILIZERS\n1.FORTIFIED FERTILIZERS\n2.SOLUBLE COMPLEX\n3.SULPHUR FERTILIZERS \n");
+          }
+                   if(strcmp(str,str12)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS ONION\n WE CAN USE SULPHUR AND AMMONIA FERTILIZERS \n");
+          }
+                    if(strcmp(str,str13)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS WHEAT\n WE CAN USE FORTIFIED FERTILIZERS\n");
+          }
+                     if(strcmp(str,str14)==0)
+        {
+                 printf("\nTHE SELECTED CROP IS RICE\n WE CAN USE WATER SOLUBLE COMPLEX FERTILIZERS \n");
+          }
+                      if(strcmp(str,str15)==0)
+        {
+                    printf("\nTHE SELECTED CROP IS MILLETS\n WE USE 2 TYPES OF FERTILIZERS\n1.SULPHUR COMPLEX\n2.PHOSPATIC FERTILIZERS \n");
+          }
+		      else{
+			      printf(" \n PLEASE CHECK THE ENTERED SPELLING \n");
+
+}
+}
+void crop_price()
+{  
+	system("cls");
+	char str[20];
+	int i;
+       	char str1[]="ridgegaurd" , str2[]="cucumber" ,str3[]="maize",str4[]="cotton",str5[]="sugarcane",str6[]="cashew",str7[]="tea",str8[]="coffee",str9[]="coconut",str10[]="tomato",str11[]="greenbeans",str12[]="onions", str13[]="wheat" ,str14[]="rice" ,str15[]="millets";
+	 printf("\n PLEASE SELECT FROM THE FOLLOWING CROPS\n1.RIDGE GAURD\n2.CUCUMBER\n3.MAIZE\n4.COTTON\n5.SUGARCANE\n6.CASHEW\n7.TEA\n8.COFFEE\n9.COCONUT\n10.TOMATO\n11.GREEN BEANS\n12.ONIONS\n13.WHEAT\n14..RICE\n15.MILLETS");
+	printf("\n ENTER THE CROP NAME FOR WHICH YOU WANT TO KNOW THE PRICE IN SMALL CASE LETTERS WITHOUT SPACES\n");
+	scanf("%s", str);
+	printf("\n PLEASE ENTER THE QUANTITY OF THE SEEDS REQUIRED \n");
+	scanf("%d", &i);
+         if(strcmp(str,str1)==0)
+        { 
+		 printf("\nTHE SELECTED CROP IS RIDGE GAURD");
+		 int rate=200;
+		printf("\n TOTAL PRICE IS %d \n",rate*i);
+	}
+
+	  if(strcmp(str,str2)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS CUCUMBER");
+		 int rate=400;
+                printf("\n TOTAL PRICE IS %d \n",rate*i);
+        }
+	   if(strcmp(str,str3)==0)
+        {
+                printf("\nTHE SELECTED CROP IS MAIZE");
+	       	int rate=350;
+                printf("\n TOTAL PRICE IS %d\n",rate*i);
+        }
+	   if(strcmp(str,str4)==0)
+	   {
+		    printf("\nTHE SELECTED CROP IS COTTON");
+		    int rate=480;
+		    printf("\n TOTAL PRICE IS %d",rate*i);
+	   }
+
+           if(strcmp(str,str5)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS SUGARCANE");
+                    int rate=345;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+
+           if(strcmp(str,str6)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS CASHEW");
+                    int rate=780;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str7)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS TEA");
+                    int rate=650;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str8)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS COFFEE");
+                    int rate=254;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str9)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS COCONUT");
+                    int rate=621;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str10)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS TOMATO");
+                    int rate=542;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str11)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS GREEN BEANS");
+                    int rate=489;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str12)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS ONION");
+                    int rate=647;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str13)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS WHEAT");
+                    int rate=901;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+                                                         
+
+           if(strcmp(str,str14)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS RICE");
+                    int rate=742;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str15)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS MILLETS");
+                    int rate=630;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+           else{
+                  printf("\n PLEASE CHECK THE ENTERED SPELLING \n");
+	   }		  
+}
+void fertilizer_price()
+{  
+	system("cls");
+	 char str[20];
+        int i;
+         char str1[]="ridgegaurd" , str2[]="cucumber" ,str3[]="maize",str4[]="cotton",str5[]="sugarcane",str6[]="cashew",str7[]="tea",str8[]="coffee",str9[]="coconut",str10[]="tomato",str11[]="greenbeans",str12[]="onions", str13[]="wheat" ,str14[]="rice" ,str15[]="millets";
+	  printf("\n PLEASE SELECT FROM THE FOLLOWING CROPS\n1.RIDGE GAURD\n2.CUCUMBER\n3.MAIZE\n4.COTTON\n5.SUGARCANE\n6.CASHEW\n7.TEA\n8.COFFEE\n9.COCONUT\n10.TOMATO\n11.GREEN BEANS\n12.ONIONS\n13.WHEAT\n14..RICE\n15.MILLETS");
+        printf("\n ENTER THE CROP FOR WHICH YOU WANT TO KNOW THE PRICE IN SMALL CASE LETTERS WITHOUT SPACES\n");
+        scanf("%s", str);
+        printf("\n PLEASE ENTER THE QUANTITY OF FERTILIZERS REQUIRED IN KG'S\n");
+        scanf("%d", &i);
+       if(strcmp(str,str1)==0)
+        { 
+		 printf("\nTHE SELECTED CROP IS RIDGE GAURD");
+		 int rate=200;
+		printf("\n TOTAL PRICE IS %d \n",rate*i);
+	}
+
+	  if(strcmp(str,str2)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS CUCUMBER");
+		 int rate=841;
+                printf("\n TOTAL PRICE IS %d \n",rate*i);
+        }
+	   if(strcmp(str,str3)==0)
+        {
+                printf("\nTHE SELECTED CROP IS MAIZE");
+	       	int rate=621;
+                printf("\n TOTAL PRICE IS %d\n",rate*i);
+        }
+	   if(strcmp(str,str4)==0)
+	   {
+		    printf("\nTHE SELECTED CROP IS COTTON");
+		    int rate=654;
+		    printf("\n TOTAL PRICE IS %d",rate*i);
+	   }
+
+           if(strcmp(str,str5)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS SUGARCANE");
+                    int rate=480;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+
+           if(strcmp(str,str6)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS CASHEW");
+                    int rate=784;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str7)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS TEA");
+                    int rate=1080;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str8)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS COFFEE");
+                    int rate=784;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str9)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS COCONUT");
+                    int rate=547;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str10)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS TOMATO");
+                    int rate=960;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str11)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS GREEN BEANS");
+                    int rate=327;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str12)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS ONION");
+                    int rate=784;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str13)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS WHEAT");
+                    int rate=987;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+                                                         
+
+           if(strcmp(str,str14)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS RICE");
+                    int rate=884;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str15)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS MILLETS");
+                    int rate=721;
+                    printf("\n TOTAL PRICE IS %d",rate*i);
+           }
+	  else{
+		 printf("\n PLEASE CHECK THE ENTERED SPELLING \n"); 
+}
+}
+void market_price()
+{
+	system("cls");
+	char str[20];
+	int i;
+       	char str1[]="ridgegaurd" , str2[]="cucumber" ,str3[]="maize",str4[]="cotton",str5[]="sugarcane",str6[]="cashew",str7[]="tea",str8[]="coffee",str9[]="coconut",str10[]="tomato",str11[]="greenbeans",str12[]="onions", str13[]="wheat" ,str14[]="rice" ,str15[]="millets";
+	 printf("\n PLEASE SELECT FROM THE FOLLOWING CROPS\n1.RIDGE GAURD\n2.CUCUMBER\n3.MAIZE\n4.COTTON\n5.SUGARCANE\n6.CASHEW\n7.TEA\n8.COFFEE\n9.COCONUT\n10.TOMATO\n11.GREEN BEANS\n12.ONIONS\n13.WHEAT\n14..RICE\n15.MILLETS");
+	printf("\n ENTER THE CROP TYPE\n IN SMALL CASE LETTERS WITHOUT SPACES \n");
+	scanf("%s", str);
+	printf("\n PLEASE ENTER THE TOTAL YIELD IN QUINTALS \n");
+	scanf("%d", &i);
+         if(strcmp(str,str1)==0)
+        { 
+		 printf("\nTHE SELECTED CROP IS RIDGE GAURD");
+		 int rate=1050;
+		printf("\n TOTAL PRICE IS %d \n",rate*i);
+	}
+
+	  if(strcmp(str,str2)==0)
+        {
+		 printf("\nTHE SELECTED CROP IS CUCUMBER");
+		 int rate=990;
+                printf("\n TOTAL PRICE IS %d \n",rate*i);
+        }
+	   if(strcmp(str,str3)==0)
+        {
+                printf("\nTHE SELECTED CROP IS MAIZE");
+	       	int rate=1200;
+                printf("\n TOTAL PRICE IS %d\n",rate*i);
+        }
+	   if(strcmp(str,str4)==0)
+	   {
+		    printf("\nTHE SELECTED CROP IS COTTON");
+		    int rate=774;
+		    printf("\n TOTAL PRIZE IS %d",rate*i);
+	   }
+
+           if(strcmp(str,str5)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS SUGARCANE");
+                    int rate=1500;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+
+           if(strcmp(str,str6)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS CASHEW");
+                    int rate=1800;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str7)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS TEA");
+                    int rate=956;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str8)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS COFFEE");
+                    int rate=887;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str9)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS COCONUT");
+                    int rate=1423;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str10)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS TOMATO");
+                    int rate=781;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str11)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS GREEN BEANS");
+                    int rate=1870;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str12)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS ONION");
+                    int rate=967;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str13)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS WHEAT");
+                    int rate=1400;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+                                                         
+
+           if(strcmp(str,str14)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS RICE");
+                    int rate=2045;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+
+           if(strcmp(str,str15)==0)
+           {
+                    printf("\nTHE SELECTED CROP IS MILLETS");
+                    int rate=1740;
+                    printf("\n TOTAL PRIZE IS %d",rate*i);
+           }
+	   else
+	   {
+		   printf("\n PLEASE CHECK THE ENTERED SPELLING \n");
+       }
+   }
+
+
+
+                   
